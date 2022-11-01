@@ -16,5 +16,8 @@ fn main() {
 
     let resized_image=test_image.thumbnail(resize_width, resize_height);
 
-    resized_image.save("test.jpg").expect("Could not save the resized image");
+
+    for (x, y, pixel) in resized_image.pixels(){
+        let avg = pixel.0[0]/3 + pixel.0[1]/3 + pixel.0[3]/3;
+    }
 }
