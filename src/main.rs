@@ -16,8 +16,26 @@ fn main() {
 
     let resized_image=test_image.thumbnail(resize_width, resize_height);
 
+    let mut ascii_art=String::new();
+
+    let from_range=Range { start: 0.0, end: 255.0 };
+    let to_range=Range { start: 0.0, end: mapping_array_len as f32 };
 
     for (x, y, pixel) in resized_image.pixels(){
         let avg = pixel.0[0]/3 + pixel.0[1]/3 + pixel.0[3]/3;
+
+       ascii_art.push(mapping_array[map_ranges(&from_range, &to_range, avg as f32).floor() as usize]) 
     }
+
+    println!("{}", ascii_art);
+
+}
+
+struct Range{
+    start: f32,
+    end: f32,
+}
+
+fn map_ranges(from_range: &Range, to_range:&Range, value: f32)->f32{
+    (value - from_range.start)/(from_range.end-from_range.start)*(to_range.end-to_range.start)+to_range.start
 }
