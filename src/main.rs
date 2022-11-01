@@ -1,4 +1,4 @@
-use image::{io::Reader as ImageReader, GenericImageView};
+use image::{io::Reader as ImageReader, GenericImageView, Pixel};
 
 fn main() {
     let scale = 10.0 as f32;
@@ -31,10 +31,15 @@ fn main() {
     };
 
     for (x, _y, pixel) in resized_image.pixels() {
-        let avg = pixel.0[0] / 3 + pixel.0[1] / 3 + pixel.0[2] / 3;
+
+        let mut avg: f32 = 0.0;
+        for val in pixel.to_rgb().channels() {
+            avg += *val as f32;
+        }
+        avg /= 3.0;
 
         ascii_art
-            .push(mapping_array[map_ranges(&from_range, &to_range, avg as f32).floor() as usize]);
+            .push(mapping_array[map_ranges(&from_range, &to_range, avg).floor() as usize]);
 
         if x == resize_width - 1 {
             ascii_art.push('\n');
