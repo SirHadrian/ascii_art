@@ -1,21 +1,45 @@
 use image::{io::Reader as ImageReader, GenericImageView, Pixel};
 use std::{env, process};
 
-fn main() {
-    let args: Vec<String> = env::args().collect();
+struct Config {
+    scale: f32,
+    reverse: bool,
+}
 
-    for argument in args.iter().nth(1) {
-        match argument.as_str() {
-            "-h" | "--help" => {
-                println!("Hello");
-            }
-
-            _ => {
-                eprintln!("Wrong argument type");
-                process::exit(1);
-            }
+impl Config {
+    fn default() -> Config {
+        Config {
+            scale: 0.0,
+            reverse: false,
         }
     }
+}
+
+fn main() {
+    let config = Config::default();
+
+    let args: Vec<String> = env::args().collect();
+
+
+    
+
+
+    // for argument in args.iter().nth(1) {
+    //     match argument as &str {
+    //         "-h" | "--help" => {
+    //             println!("Hello");
+    //         }
+
+    //         "-s" | "--scale" => {
+    //             println!("{:?}", args.iter().next());
+    //         }
+
+    //         _ => {
+    //             eprintln!("Wrong argument type");
+    //             process::exit(1);
+    //         }
+    //     }
+    // }
 
     // let scale = 10.0 as f32;
     // //let mapping = " `.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@";
