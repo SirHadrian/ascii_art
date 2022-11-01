@@ -1,7 +1,7 @@
 use image::{io::Reader as ImageReader, GenericImageView};
 
 fn main() {
-    let scale = 10.0 as f32;
+    let scale = 15.0 as f32;
     let mapping = " `.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@";
 
     let mapping_array: Vec<char> = mapping.chars().collect();
@@ -30,7 +30,7 @@ fn main() {
     };
 
     for (x, _y, pixel) in resized_image.pixels() {
-        let avg = pixel.0[0] / 3 + pixel.0[1] / 3 + pixel.0[3] / 3;
+        let avg = pixel.0[0] / 3 + pixel.0[1] / 3 + pixel.0[2] / 3;
 
         ascii_art
             .push(mapping_array[map_ranges(&from_range, &to_range, avg as f32).floor() as usize]);
