@@ -20,9 +20,27 @@ fn main() {
 
     let args: Vec<String> = env::args().collect();
 
-    let test = args.iter();
+    let mut test = args.iter();
 
-    
+    test.next();
+    loop{
+        let arg = test.next().expect("no more arguments");
+        match arg as &str {
+                    "-h" | "--help" => {
+                        println!("Hello");
+                    }
+        
+                    "-s" | "--scale" => {
+                        println!("{:?}", test.next());
+                    }
+        
+                    _ => {
+                        eprintln!("Wrong argument type");
+                        break;
+                        //process::exit(1);
+                    }
+                }
+    }
 
     // for argument in test {
     //     match argument as &str {
