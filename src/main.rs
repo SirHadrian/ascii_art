@@ -16,48 +16,36 @@ impl Config {
 }
 
 fn main() {
-    let config = Config::default();
+    let mut config = Config::default();
 
     let args: Vec<String> = env::args().collect();
 
     let mut test = args.iter();
 
+    // Skip first value
     test.next();
-    loop{
-        let arg = test.next().expect("no more arguments");
+    loop {
+        let arg = match test.next() {
+            Some(val) => val,
+            None => break,
+        };
         match arg as &str {
-                    "-h" | "--help" => {
-                        println!("Hello");
-                    }
-        
-                    "-s" | "--scale" => {
-                        println!("{:?}", test.next());
-                    }
-        
-                    _ => {
-                        eprintln!("Wrong argument type");
-                        break;
-                        //process::exit(1);
-                    }
+            "-h" | "--help" => {
+                println!("Hello");
+            }
+
+            "-s" | "--scale" => {
+                if let Some(val) = test.next() {
+                    config.scale = val.parse::<f32>().expect("Incorrect scale value");
                 }
+            }
+
+            _ => {
+                eprintln!("Wrong argument type");
+                process::exit(1);
+            }
+        }
     }
-
-    // for argument in test {
-    //     match argument as &str {
-    //         "-h" | "--help" => {
-    //             println!("Hello");
-    //         }
-
-    //         "-s" | "--scale" => {
-    //             println!("{:?}", test.next());
-    //         }
-
-    //         _ => {
-    //             eprintln!("Wrong argument type");
-    //             //process::exit(1);
-    //         }
-    //     }
-    // }
 
     // let scale = 10.0 as f32;
     // //let mapping = " `.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@";
