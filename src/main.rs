@@ -1,8 +1,9 @@
 use image::{io::Reader as ImageReader, GenericImageView};
 
 fn main() {
-    let scale = 15.0 as f32;
-    let mapping = " `.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@";
+    let scale = 10.0 as f32;
+    //let mapping = " `.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@";
+    let mapping = "  _.,-=+:;cba!?0123456789$W#@Ñ";
 
     let mapping_array: Vec<char> = mapping.chars().collect();
     let mapping_array_len = mapping_array.len();
