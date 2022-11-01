@@ -20,23 +20,23 @@ fn main() {
 
     let args: Vec<String> = env::args().collect();
 
+    let test = args.iter();
 
     
 
-
-    // for argument in args.iter().nth(1) {
+    // for argument in test {
     //     match argument as &str {
     //         "-h" | "--help" => {
     //             println!("Hello");
     //         }
 
     //         "-s" | "--scale" => {
-    //             println!("{:?}", args.iter().next());
+    //             println!("{:?}", test.next());
     //         }
 
     //         _ => {
     //             eprintln!("Wrong argument type");
-    //             process::exit(1);
+    //             //process::exit(1);
     //         }
     //     }
     // }
