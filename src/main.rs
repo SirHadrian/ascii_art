@@ -8,7 +8,7 @@ fn main() {
     // Configs setup
     let mut config = Config::default();
     let mut image: Option<Image> = None;
-    
+
     // Get arguments from cli
     let retrive_args: Vec<String> = env::args().collect();
     let mut arguments = retrive_args.iter();
@@ -24,7 +24,14 @@ fn main() {
         match arg as &str {
             "-r" | "--reduce" => match arguments.next() {
                 Some(value) => {
-                    config.scale = value.parse::<f32>().expect("Incorrect scale value");
+                    let reduce = value.parse::<f32>().expect("Incorrect reduce value");
+
+                    if reduce > 0.0 {
+                        config.scale = reduce;
+                    } else {
+                        eprintln!("Incorect reduce value");
+                        process::exit(1);
+                    }
                 }
                 None => {
                     eprintln!("No scale value supplied");
