@@ -7,6 +7,8 @@ fn main() {
 
     let args: Vec<String> = env::args().collect();
 
+    let mut image: Option<Image> = None;
+
     let mut test = args.iter();
 
     // Skip first value
@@ -34,8 +36,7 @@ fn main() {
 
             "-p" | "--path" => match test.next() {
                 Some(path) => {
-                    let image = load_file(path);
-                    run(&config, &image);
+                    image = Some(load_file(path));
                 }
                 None => {
                     eprintln!("No path supplied");
@@ -61,6 +62,10 @@ fn main() {
                 process::exit(1);
             }
         }
+    }
+
+    if let Some(img) = image {
+        run(&config, &img);
     }
 }
 
@@ -93,7 +98,12 @@ fn help(config: &Config) {
 }
 
 fn run(config: &Config, image: &Image) {
-    let mapping_array: Vec<char> = config.maps.get
+    let mapping_array: Vec<char> = if let Some(map) = config.maps.get(&config.mapping) {
+        map.chars().collect()
+    } else {
+        eprintln!("Could not get mapping from hashmap");
+        process::exit(1);
+    };
     let mapping_array_len = mapping_array.len();
 
     let resize_width = (image.width / config.scale).floor() as u32;
