@@ -3,7 +3,7 @@ pub mod actions {
     use ascii_art::{Config, Image, Range};
     use image::{GenericImageView, Pixel};
     use pad::{Alignment, PadStr};
-    use std::{process, string};
+    use std::process;
 
     pub fn load_file(path: &str) -> Image {
         match Image::new(path) {
@@ -35,7 +35,7 @@ pub mod actions {
     }
 
     pub fn run(config: &Config, image: &Image) {
-        let mut string_map = if let Some(map) = config.maps.get(&config.mapping) {
+        let string_map = if let Some(map) = config.maps.get(&config.mapping) {
             map
         } else {
             eprintln!("Could not get mapping from hashmap");
@@ -43,9 +43,9 @@ pub mod actions {
         };
 
         let pad_width = string_map.len() + config.spaces as usize;
-        string_map.pad_to_width_with_alignment(pad_width, Alignment::Right);
+        let padded_string_map = string_map.pad_to_width_with_alignment(pad_width, Alignment::Right);
 
-        let mut chosen_map: Vec<char> = string_map.chars().collect();
+        let mut chosen_map: Vec<char> = padded_string_map.chars().collect();
 
         if config.inverse {
             chosen_map.reverse();
