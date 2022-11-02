@@ -1,4 +1,3 @@
-
 pub struct Config {
     pub scale: f32,
     pub reverse: bool,
@@ -18,8 +17,9 @@ pub struct Range {
     pub end: f32,
 }
 
-fn map_ranges(from_range: &Range, to_range: &Range, value: f32) -> f32 {
-    (value - from_range.start) / (from_range.end - from_range.start)
-        * (to_range.end - to_range.start)
-        + to_range.start
+impl Range {
+    pub fn map_to_this_range(&self, other_range: &Range, value: f32) -> f32 {
+        (value - self.start) / (self.end - self.start) * (other_range.end - other_range.start)
+            + other_range.start
+    }
 }
