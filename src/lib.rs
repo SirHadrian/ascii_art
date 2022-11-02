@@ -1,8 +1,6 @@
-use image::{io::Reader as ImageReader, GenericImageView};
+use image::{io::Reader as ImageReader, GenericImageView, DynamicImage};
 use std::collections::HashMap;
 use std::error::Error;
-
-use image::{self, DynamicImage};
 
 pub struct Config {
     pub scale: f32,
