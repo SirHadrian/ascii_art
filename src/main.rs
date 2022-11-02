@@ -34,11 +34,15 @@ fn main() {
                 println!("Hello");
             }
 
-            "-s" | "--scale" => {
-                if let Some(val) = test.next() {
-                    config.scale = val.parse::<f32>().expect("Incorrect scale value");
+            "-s" | "--scale" => match test.next() {
+                Some(value) => {
+                    config.scale = value.parse::<f32>().expect("Incorrect scale value");
                 }
-            }
+                None => {
+                    eprintln!("No scale value supplied");
+                    process::exit(1);
+                }
+            },
 
             _ => {
                 eprintln!("Wrong argument type");
