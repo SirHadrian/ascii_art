@@ -32,6 +32,7 @@ pub mod actions {
             config.mapping
         );
         println!("-i, --inverse         Inverse the mapping of ascii chars, default darkest -> brightest");
+        println!("-s, --spaces          Pad extra spaces to the left of mapping strings to increase contrast, default: {}", config.spaces);
     }
 
     pub fn run(config: &Config, image: &Image) {

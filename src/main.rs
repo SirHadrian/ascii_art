@@ -5,16 +5,18 @@ mod commands;
 use crate::commands::actions;
 
 fn main() {
+    // Configs setup
     let mut config = Config::default();
-
+    let mut image: Option<Image> = None;
+    
+    // Get arguments from cli
     let retrive_args: Vec<String> = env::args().collect();
     let mut arguments = retrive_args.iter();
-
-    let mut image: Option<Image> = None;
 
     // Skip first value
     arguments.next();
     loop {
+        // Get the next argument in iterator
         let arg = match arguments.next() {
             Some(val) => val,
             None => break,
@@ -77,6 +79,7 @@ fn main() {
         }
     }
 
+    // Run only if the image is initialized
     if let Some(img) = image {
         actions::run(&config, &img);
     }
