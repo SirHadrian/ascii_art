@@ -34,12 +34,14 @@ pub mod actions {
     }
 
     pub fn run(config: &Config, image: &Image) {
-        let mut chosen_map: Vec<char> = if let Some(map) = config.maps.get(&config.mapping) {
-            map.chars().collect()
+        let mut string_map = if let Some(map) = config.maps.get(&config.mapping) {
+            map
         } else {
             eprintln!("Could not get mapping from hashmap");
             process::exit(1);
         };
+        
+        let mut chosen_map: Vec<char> = string_map.chars().collect();
 
         if config.inverse {
             chosen_map.reverse();
