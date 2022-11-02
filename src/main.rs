@@ -21,11 +21,6 @@ fn main() {
             None => break,
         };
         match arg as &str {
-            "-h" | "--help" => {
-                actions::help(&config);
-                process::exit(0);
-            }
-
             "-r" | "--reduce" => match test.next() {
                 Some(value) => {
                     config.scale = value.parse::<f32>().expect("Incorrect scale value");
@@ -59,8 +54,21 @@ fn main() {
                 None => (),
             },
 
+            "-s" | "--spaces" => match test.next() {
+                Some(value) => {
+                    let spaces = value.parse::<u8>().expect("Incorect spaces value");
+                    config.spaces = spaces;
+                }
+                None => (),
+            },
+
             "-i" | "--inverse" => {
                 config.inverse = true;
+            }
+
+            "-h" | "--help" => {
+                actions::help(&config);
+                process::exit(0);
             }
 
             _ => {

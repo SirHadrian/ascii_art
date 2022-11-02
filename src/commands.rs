@@ -30,6 +30,7 @@ pub mod actions {
             "-m, --mapping         Select ASCII character to use in mapping the image, default: {}",
             config.mapping
         );
+        println!("-i, --inverse         Inverse the mapping of ascii chars, default darkest -> brightest");
     }
 
     pub fn run(config: &Config, image: &Image) {
@@ -39,6 +40,7 @@ pub mod actions {
             eprintln!("Could not get mapping from hashmap");
             process::exit(1);
         };
+
         if config.inverse {
             chosen_map.reverse();
         }

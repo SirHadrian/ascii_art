@@ -7,19 +7,21 @@ pub struct Config {
     pub inverse: bool,
     pub mapping: u8,
     pub maps: HashMap<u8, String>,
+    pub spaces: u8,
 }
 
 impl Config {
     pub fn default() -> Config {
         let mut maps = HashMap::new();
-        maps.insert(1, String::from("  _.,-=+:;cba!?0123456789$W#@Ñ"));
-        maps.insert(2, String::from(" `.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@"));
+        maps.insert(1, String::from("_.,-=+:;cba!?0123456789$W#@Ñ"));
+        maps.insert(2, String::from("`.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@"));
 
         Config {
             scale: 10.0,
             inverse: false,
             mapping: 1,
             maps,
+            spaces: 1,
         }
     }
 }
