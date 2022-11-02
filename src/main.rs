@@ -32,6 +32,14 @@ fn main() {
                 }
             },
 
+            "-p" | "--path" => match test.next() {
+                Some(path) => {}
+                None => {
+                    eprintln!("No path supplied");
+                    process::exit(1);
+                }
+            },
+
             _ => {
                 eprintln!("Wrong argument type");
                 process::exit(1);
