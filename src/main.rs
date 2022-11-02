@@ -34,7 +34,7 @@ fn main() {
 
             "-p" | "--path" => match test.next() {
                 Some(path) => {
-                    let image = load_file("cat.jpg");
+                    let image = load_file(path);
                     run(&config, &image);
                 }
                 None => {
