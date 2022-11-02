@@ -1,4 +1,4 @@
-use image::{io::Reader as ImageReader, GenericImageView, DynamicImage};
+use image::{io::Reader as ImageReader, DynamicImage, GenericImageView};
 use std::collections::HashMap;
 use std::error::Error;
 
@@ -11,8 +11,10 @@ pub struct Config {
 }
 
 impl Config {
+    // Default configuration for processing the image
     pub fn default() -> Config {
         let mut maps = HashMap::new();
+
         maps.insert(1, String::from("_.,-=+:;cba!?0123456789$W#@Ñ"));
         maps.insert(2, String::from("`.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@"));
 

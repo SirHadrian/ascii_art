@@ -5,6 +5,7 @@ pub mod actions {
     use pad::{Alignment, PadStr};
     use std::process;
 
+    // Get image path
     pub fn load_file(path: &str) -> Image {
         match Image::new(path) {
             Ok(img) => img,
@@ -15,6 +16,7 @@ pub mod actions {
         }
     }
 
+    // Help message
     pub fn help(config: &Config) {
         println!("\nASCII ART");
         println!("\nConvert image to ascii representation");
@@ -35,7 +37,9 @@ pub mod actions {
         println!("-s, --spaces          Pad extra spaces to the left of mapping strings to increase contrast, default: {}", config.spaces);
     }
 
+    // Process the image with the supplied config
     pub fn run(config: &Config, image: &Image) {
+        // Get the chosen map from the config hashmap
         let string_map = if let Some(map) = config.maps.get(&config.mapping) {
             map
         } else {
@@ -43,19 +47,22 @@ pub mod actions {
             process::exit(1);
         };
 
+        // Pad the map with the number of spaces supplied in the config
         let pad_width = string_map.len() + config.spaces as usize;
         let padded_string_map = string_map.pad_to_width_with_alignment(pad_width, Alignment::Right);
 
         let mut chosen_map: Vec<char> = padded_string_map.chars().collect();
 
+        // Inverse the contrast if arg is supplied
         if config.inverse {
             chosen_map.reverse();
         }
+
         let chosen_map_len = chosen_map.len();
 
+        // Make the image smaller
         let resize_width = (image.width / config.scale).floor() as u32;
         let resize_height = (image.height / config.scale).floor() as u32;
-
         let resized_image = image.image.thumbnail(resize_width, resize_height);
 
         let mut ascii_art = String::new();
@@ -65,6 +72,7 @@ pub mod actions {
             end: chosen_map_len as f32,
         };
 
+        // Process each pixel in the image
         for (x, _y, pixel) in resized_image.pixels() {
             // Calculate average brightness
             let mut avg: f32 = 0.0;
@@ -84,6 +92,7 @@ pub mod actions {
                 ascii_art.push('\n');
             }
         }
+        // Print the final image to standard output
         println!("{}", ascii_art);
     }
 }
