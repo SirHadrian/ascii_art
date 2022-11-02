@@ -1,4 +1,5 @@
 use image::{io::Reader as ImageReader, GenericImageView};
+use std::collections::HashMap;
 use std::error::Error;
 
 use image::{self, DynamicImage};
@@ -6,13 +7,21 @@ use image::{self, DynamicImage};
 pub struct Config {
     pub scale: f32,
     pub reverse: bool,
+    pub mapping: u8,
+    pub maps: HashMap<u8, String>,
 }
 
 impl Config {
     pub fn default() -> Config {
+        let mut maps = HashMap::new();
+        maps.insert(1, String::from("  _.,-=+:;cba!?0123456789$W#@Ñ"));
+        maps.insert(2, String::from(" `.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@"));
+
         Config {
             scale: 10.0,
             reverse: false,
+            mapping: 1,
+            maps,
         }
     }
 }
@@ -40,12 +49,10 @@ impl Image {
         let image = ImageReader::open(path)?.decode()?;
         let (width, height) = image.dimensions();
 
-        Ok(
-            Image{
-                image,
-                width: width as f32,
-                height: height as f32,  
-            }
-        )
+        Ok(Image {
+            image,
+            width: width as f32,
+            height: height as f32,
+        })
     }
 }

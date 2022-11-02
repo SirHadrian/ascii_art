@@ -43,6 +43,19 @@ fn main() {
                 }
             },
 
+            "-m" | "--mapping" => match test.next() {
+                Some(mode) => {
+                    let mapping = mode.parse::<u8>().expect("Incorect mapping value");
+                    if config.maps.contains_key(&mapping) {
+                        config.mapping = mapping;
+                    } else {
+                        eprintln!("Incorect mapping option");
+                        process::exit(1);
+                    }
+                }
+                None => (),
+            },
+
             _ => {
                 eprintln!("Wrong argument type");
                 process::exit(1);
@@ -73,13 +86,14 @@ fn help(config: &Config) {
         "-r, --reduce          Reduce the image size, default: {}",
         config.scale
     );
+    println!(
+        "-m, --mapping         Select ASCII character to use in mapping the image, default: {}",
+        config.mapping
+    );
 }
 
 fn run(config: &Config, image: &Image) {
-    //let mapping = " `.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@";
-    let mapping = "  _.,-=+:;cba!?0123456789$W#@Ñ";
-
-    let mapping_array: Vec<char> = mapping.chars().collect();
+    let mapping_array: Vec<char> = config.maps.get
     let mapping_array_len = mapping_array.len();
 
     let resize_width = (image.width / config.scale).floor() as u32;
