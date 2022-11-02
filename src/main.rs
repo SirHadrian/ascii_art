@@ -1,19 +1,6 @@
+use ascii_art::Config;
 use image::{io::Reader as ImageReader, GenericImageView, Pixel};
 use std::{env, process};
-
-struct Config {
-    scale: f32,
-    reverse: bool,
-}
-
-impl Config {
-    fn default() -> Config {
-        Config {
-            scale: 0.0,
-            reverse: false,
-        }
-    }
-}
 
 fn main() {
     let mut config = Config::default();
