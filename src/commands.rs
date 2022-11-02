@@ -33,12 +33,15 @@ pub mod actions {
     }
 
     pub fn run(config: &Config, image: &Image) {
-        let chosen_map: Vec<char> = if let Some(map) = config.maps.get(&config.mapping) {
+        let mut chosen_map: Vec<char> = if let Some(map) = config.maps.get(&config.mapping) {
             map.chars().collect()
         } else {
             eprintln!("Could not get mapping from hashmap");
             process::exit(1);
         };
+        if config.inverse {
+            chosen_map.reverse();
+        }
         let chosen_map_len = chosen_map.len();
 
         let resize_width = (image.width / config.scale).floor() as u32;

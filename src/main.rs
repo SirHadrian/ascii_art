@@ -59,6 +59,10 @@ fn main() {
                 None => (),
             },
 
+            "-i" | "--inverse" => {
+                config.inverse = true;
+            }
+
             _ => {
                 eprintln!("Wrong argument type");
                 process::exit(1);

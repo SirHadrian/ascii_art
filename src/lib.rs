@@ -4,7 +4,7 @@ use std::error::Error;
 
 pub struct Config {
     pub scale: f32,
-    pub reverse: bool,
+    pub inverse: bool,
     pub mapping: u8,
     pub maps: HashMap<u8, String>,
 }
@@ -17,7 +17,7 @@ impl Config {
 
         Config {
             scale: 10.0,
-            reverse: false,
+            inverse: false,
             mapping: 1,
             maps,
         }
