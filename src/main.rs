@@ -113,10 +113,6 @@ fn run(config: &Config, image: &Image) {
 
     let mut ascii_art = String::new();
 
-    let from_range = Range {
-        start: 0.0,
-        end: 255.0,
-    };
     let to_range = Range {
         start: 0.0,
         end: mapping_array_len as f32,
@@ -129,8 +125,11 @@ fn run(config: &Config, image: &Image) {
         }
         avg /= 3.0;
 
-        ascii_art
-            .push(mapping_array[from_range.map_to_this_range(&to_range, avg).floor() as usize]);
+        ascii_art.push(
+            mapping_array[Range::get_rbg_range()
+                .map_to_this_range(&to_range, avg)
+                .floor() as usize],
+        );
 
         if x == resize_width - 1 {
             ascii_art.push('\n');

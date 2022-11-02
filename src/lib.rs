@@ -36,6 +36,13 @@ impl Range {
         (value - self.start) / (self.end - self.start) * (other_range.end - other_range.start)
             + other_range.start
     }
+
+    pub fn get_rbg_range() -> Range {
+        Range {
+            start: 0.0,
+            end: 255.0,
+        }
+    }
 }
 
 pub struct Image {
