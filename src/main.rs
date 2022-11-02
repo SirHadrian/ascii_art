@@ -50,6 +50,8 @@ fn main() {
     run(&config);
 }
 
+fn load_file(path: &str) {}
+
 fn help(config: &Config) {
     println!("\nASCII ART");
     println!("\nConvert image to ascii representation");
@@ -71,14 +73,10 @@ fn run(config: &Config) {
     let mapping_array: Vec<char> = mapping.chars().collect();
     let mapping_array_len = mapping_array.len();
 
-    let test_image = ImageReader::open("cat.jpg")
-        .expect("Could not find the file")
-        .decode()
-        .expect("Could not decode the file contents");
-    let (width, height) = test_image.dimensions();
+    
 
-    let resize_width = (width as f32 / config.scale) as u32;
-    let resize_height = (height as f32 / config.scale) as u32;
+    let resize_width = (width as f32 / config.scale).floor() as u32;
+    let resize_height = (height as f32 / config.scale).floor() as u32;
 
     let resized_image = test_image.thumbnail(resize_width, resize_height);
 
