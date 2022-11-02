@@ -98,13 +98,13 @@ fn help(config: &Config) {
 }
 
 fn run(config: &Config, image: &Image) {
-    let mapping_array: Vec<char> = if let Some(map) = config.maps.get(&config.mapping) {
+    let chosen_map: Vec<char> = if let Some(map) = config.maps.get(&config.mapping) {
         map.chars().collect()
     } else {
         eprintln!("Could not get mapping from hashmap");
         process::exit(1);
     };
-    let mapping_array_len = mapping_array.len();
+    let chosen_map_len = chosen_map.len();
 
     let resize_width = (image.width / config.scale).floor() as u32;
     let resize_height = (image.height / config.scale).floor() as u32;
@@ -115,10 +115,11 @@ fn run(config: &Config, image: &Image) {
 
     let to_range = Range {
         start: 0.0,
-        end: mapping_array_len as f32,
+        end: chosen_map_len as f32,
     };
 
     for (x, _y, pixel) in resized_image.pixels() {
+        // Calculate average brightness
         let mut avg: f32 = 0.0;
         for val in pixel.to_rgb().channels() {
             avg += *val as f32;
@@ -126,11 +127,12 @@ fn run(config: &Config, image: &Image) {
         avg /= 3.0;
 
         ascii_art.push(
-            mapping_array[Range::get_rbg_range()
+            chosen_map[Range::get_rbg_range()
                 .map_to_this_range(&to_range, avg)
                 .floor() as usize],
         );
 
+        // Check if is the last pixel in array
         if x == resize_width - 1 {
             ascii_art.push('\n');
         }
