@@ -18,7 +18,8 @@ fn main() {
         };
         match arg as &str {
             "-h" | "--help" => {
-                println!("Hello");
+                help(&config);
+                process::exit(0);
             }
 
             "-r" | "--reduce" => match test.next() {
@@ -39,6 +40,20 @@ fn main() {
     }
 
     run(&config);
+}
+
+fn help(config: &Config) {
+    println!("\nASCII ART");
+    println!("\nConvert image to ascii representation");
+    println!("\nUsage:[EXE] [OPTIONS] -p, --path <FILE>");
+    println!("\nMandatory: ");
+    println!("-p, --path <FILE>     Path to the image file");
+    println!("\nOptions: ");
+    println!("-h, --help            Print help information");
+    println!(
+        "-r, --reduce          Reduce the image size, default: {}",
+        config.scale
+    );
 }
 
 fn run(config: &Config) {
