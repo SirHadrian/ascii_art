@@ -58,7 +58,7 @@ pub mod actions {
             chosen_map.reverse();
         }
 
-        let chosen_map_len = chosen_map.len();
+        let chosen_map_len = chosen_map.len() - 1;
 
         // Make the image smaller
         let resize_width = (image.width / config.scale).floor() as u32;
