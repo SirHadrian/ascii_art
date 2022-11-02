@@ -6,7 +6,7 @@ pub struct Config {
 impl Config {
     pub fn default() -> Config {
         Config {
-            scale: 0.0,
+            scale: 10.0,
             reverse: false,
         }
     }

@@ -21,7 +21,7 @@ fn main() {
                 println!("Hello");
             }
 
-            "-s" | "--scale" => match test.next() {
+            "-r" | "--reduce" => match test.next() {
                 Some(value) => {
                     config.scale = value.parse::<f32>().expect("Incorrect scale value");
                 }
