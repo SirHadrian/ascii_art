@@ -1,4 +1,4 @@
-pub mod commands {
+pub mod actions {
 
     use ascii_art::{Config, Image, Range};
     use image::{GenericImageView, Pixel};

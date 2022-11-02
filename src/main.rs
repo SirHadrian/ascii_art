@@ -1,8 +1,8 @@
 use ascii_art::{Config, Image};
 use std::{env, process};
 
-mod actions;
-use crate::actions::commands;
+mod commands;
+use crate::commands::actions;
 
 fn main() {
     let mut config = Config::default();
@@ -22,7 +22,7 @@ fn main() {
         };
         match arg as &str {
             "-h" | "--help" => {
-                commands::help(&config);
+                actions::help(&config);
                 process::exit(0);
             }
 
@@ -38,7 +38,7 @@ fn main() {
 
             "-p" | "--path" => match test.next() {
                 Some(path) => {
-                    image = Some(commands::load_file(path));
+                    image = Some(actions::load_file(path));
                 }
                 None => {
                     eprintln!("No path supplied");
@@ -67,6 +67,6 @@ fn main() {
     }
 
     if let Some(img) = image {
-        commands::run(&config, &img);
+        actions::run(&config, &img);
     }
 }
