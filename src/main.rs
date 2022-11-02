@@ -7,21 +7,20 @@ use crate::commands::actions;
 fn main() {
     let mut config = Config::default();
 
-    let args: Vec<String> = env::args().collect();
+    let retrive_args: Vec<String> = env::args().collect();
+    let mut arguments = retrive_args.iter();
 
     let mut image: Option<Image> = None;
 
-    let mut test = args.iter();
-
     // Skip first value
-    test.next();
+    arguments.next();
     loop {
-        let arg = match test.next() {
+        let arg = match arguments.next() {
             Some(val) => val,
             None => break,
         };
         match arg as &str {
-            "-r" | "--reduce" => match test.next() {
+            "-r" | "--reduce" => match arguments.next() {
                 Some(value) => {
                     config.scale = value.parse::<f32>().expect("Incorrect scale value");
                 }
@@ -31,7 +30,7 @@ fn main() {
                 }
             },
 
-            "-p" | "--path" => match test.next() {
+            "-p" | "--path" => match arguments.next() {
                 Some(path) => {
                     image = Some(actions::load_file(path));
                 }
@@ -41,7 +40,7 @@ fn main() {
                 }
             },
 
-            "-m" | "--mapping" => match test.next() {
+            "-m" | "--mapping" => match arguments.next() {
                 Some(mode) => {
                     let mapping = mode.parse::<u8>().expect("Incorect mapping value");
                     if config.maps.contains_key(&mapping) {
@@ -54,7 +53,7 @@ fn main() {
                 None => (),
             },
 
-            "-s" | "--spaces" => match test.next() {
+            "-s" | "--spaces" => match arguments.next() {
                 Some(value) => {
                     let spaces = value.parse::<u8>().expect("Incorect spaces value");
                     config.spaces = spaces;
