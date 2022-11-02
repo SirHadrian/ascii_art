@@ -1,5 +1,5 @@
-use ascii_art::{Config, Range};
-use image::{io::Reader as ImageReader, GenericImageView, Pixel};
+use ascii_art::{Config, Image, Range};
+use image::{GenericImageView, Pixel};
 use std::{env, process};
 
 fn main() {
@@ -33,7 +33,10 @@ fn main() {
             },
 
             "-p" | "--path" => match test.next() {
-                Some(path) => {}
+                Some(path) => {
+                    let image = load_file("cat.jpg");
+                    run(&config, &image);
+                }
                 None => {
                     eprintln!("No path supplied");
                     process::exit(1);
@@ -46,11 +49,17 @@ fn main() {
             }
         }
     }
-
-    run(&config);
 }
 
-fn load_file(path: &str) {}
+fn load_file(path: &str) -> Image {
+    match Image::new(path) {
+        Ok(img) => img,
+        Err(_) => {
+            eprintln!("Error in loading the image from file");
+            process::exit(1);
+        }
+    }
+}
 
 fn help(config: &Config) {
     println!("\nASCII ART");
@@ -66,19 +75,17 @@ fn help(config: &Config) {
     );
 }
 
-fn run(config: &Config) {
+fn run(config: &Config, image: &Image) {
     //let mapping = " `.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@";
     let mapping = "  _.,-=+:;cba!?0123456789$W#@Ñ";
 
     let mapping_array: Vec<char> = mapping.chars().collect();
     let mapping_array_len = mapping_array.len();
 
-    
+    let resize_width = (image.width / config.scale).floor() as u32;
+    let resize_height = (image.height / config.scale).floor() as u32;
 
-    let resize_width = (width as f32 / config.scale).floor() as u32;
-    let resize_height = (height as f32 / config.scale).floor() as u32;
-
-    let resized_image = test_image.thumbnail(resize_width, resize_height);
+    let resized_image = image.image.thumbnail(resize_width, resize_height);
 
     let mut ascii_art = String::new();
 
