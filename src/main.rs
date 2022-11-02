@@ -1,4 +1,4 @@
-use ascii_art::Config;
+use ascii_art::{Config, Range};
 use image::{io::Reader as ImageReader, GenericImageView, Pixel};
 use std::{env, process};
 
@@ -81,15 +81,4 @@ fn main() {
     //     }
     // }
     // println!("{}", ascii_art);
-}
-
-struct Range {
-    start: f32,
-    end: f32,
-}
-
-fn map_ranges(from_range: &Range, to_range: &Range, value: f32) -> f32 {
-    (value - from_range.start) / (from_range.end - from_range.start)
-        * (to_range.end - to_range.start)
-        + to_range.start
 }
