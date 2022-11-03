@@ -75,11 +75,14 @@ pub mod actions {
         // Process each pixel in the image
         for (x, _y, pixel) in resized_image.pixels() {
             // Calculate average brightness
-            let mut avg: f32 = 0.0;
-            for val in pixel.to_rgb().channels() {
-                avg += *val as f32;
-            }
-            avg /= 3.0;
+            let mut brightness: f32 = 0.0;
+
+            // Calcualte brightness based on a relative luminance function R 0 | G 1 | B 2
+            let red = pixel.0[0] as f32;
+            let green = pixel.0[1] as f32;
+            let blue = pixel.0[2] as f32;
+
+            
 
             ascii_art.push(
                 chosen_map[Range::get_rbg_range()
