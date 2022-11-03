@@ -1,7 +1,7 @@
 pub mod actions {
 
     use ascii_art::{Config, Image, Range};
-    use image::{GenericImageView, Pixel};
+    use image::{GenericImageView};
     use pad::{Alignment, PadStr};
     use std::process;
 
