@@ -61,8 +61,8 @@ pub mod actions {
         let chosen_map_len = chosen_map.len() - 1;
 
         // Make the image smaller
-        let resize_width = (image.width / config.scale).floor() as u32;
-        let resize_height = (image.height / config.scale).floor() as u32;
+        let resize_width = (image.width / config.scale) as u32;
+        let resize_height = (image.height / config.scale) as u32;
         let resized_image = image.image.thumbnail(resize_width, resize_height);
 
         let mut ascii_art = String::new();
