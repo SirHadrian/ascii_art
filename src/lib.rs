@@ -8,7 +8,6 @@ pub struct Config {
     pub mapping: u8,
     pub maps: HashMap<u8, String>,
     pub spaces: u8,
-    pub rgb_values: [f32; 3],
 }
 
 impl Config {
@@ -30,7 +29,6 @@ impl Config {
             mapping: 1,
             maps: greyscale_maps,
             spaces: 1,
-            rgb_values: [0.2126, 0.7152, 0.0722],
         }
     }
 }
