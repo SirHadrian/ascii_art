@@ -17,6 +17,11 @@ impl Config {
 
         maps.insert(1, String::from("_.,-=+:;cba!?0123456789$W#@Ñ"));
         maps.insert(2, String::from("`.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@"));
+        maps.insert(
+            3,
+            String::from(" .`'^,:;Il!i~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"),
+        );
+        maps.insert(4, String::from(" .:-=+*#%@"));
 
         Config {
             scale: 10.0,
