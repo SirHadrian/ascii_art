@@ -13,21 +13,21 @@ pub struct Config {
 impl Config {
     // Default configuration for processing the image
     pub fn default() -> Config {
-        let mut maps = HashMap::new();
+        let mut greyscale_maps = HashMap::new();
 
-        maps.insert(1, String::from("_.,-=+:;cba!?0123456789$W#@Ñ"));
-        maps.insert(2, String::from("`.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@"));
-        maps.insert(
+        greyscale_maps.insert(1, String::from("_.,-=+:;cba!?0123456789$W#@Ñ"));
+        greyscale_maps.insert(2, String::from("`.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@"));
+        greyscale_maps.insert(
             3,
             String::from(" .`'\"^,:;Il!i~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"),
         );
-        maps.insert(4, String::from(" .:-=+*#%@"));
+        greyscale_maps.insert(4, String::from(" .:-=+*#%@"));
 
         Config {
             scale: 10.0,
             inverse: false,
             mapping: 1,
-            maps,
+            maps: greyscale_maps,
             spaces: 1,
         }
     }
