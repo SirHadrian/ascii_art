@@ -1,7 +1,5 @@
 mod application;
 mod arguments;
-mod image;
-mod range;
 
 use std::env;
 

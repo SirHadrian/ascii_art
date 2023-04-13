@@ -1,11 +1,14 @@
-use crate::arguments::Config;
-use crate::image::Image;
-use crate::range::Range;
+mod img;
+mod range;
+
+use img::Image;
+use range::Range;
 
 use image::GenericImageView;
 use pad::{Alignment, PadStr};
-
 use std::process;
+
+use crate::arguments::Config;
 
 // Process the image with the supplied config
 pub fn run(config: &Config) {
