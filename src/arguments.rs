@@ -113,7 +113,7 @@ impl Config {
                             config.scale
                         );
                         println!(
-            "-m, --mapping         Select ASCII character to use in mapping the image, default: {}",
+            "-m, --mapping         Select ASCII character to use in mapping the image 1-4, default: {}",
             config.mapping
         );
                         println!("-i, --inverse         Inverse the mapping of ascii chars, default darkest -> brightest");
